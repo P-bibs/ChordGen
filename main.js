@@ -3,7 +3,7 @@ var hashedReverseDict;
 var synth;
 var lastPrediction;
 var doStopPlayback;
-var MINIMUM_CHORDAL_MEMBERS = 3;
+var MINIMUM_CHORDAL_MEMBERS = 4;
 
 async function initModel(){
   model = await tf.loadLayersModel('http://localhost:8081/model.json');
@@ -31,13 +31,13 @@ function shapeModelOutput(raw){
     out[i] = arr.slice(12*i, 12*(i+1))
   }
 
-  //out = probabilityToBinary(out);
+  out = probabilityToBinary(out);
 
-  out = out.map(function(a){
-    return a.map(function(b){
-      return b > .5 ? 1 : 0
-    })
-  })
+  // out = out.map(function(a){
+  //   return a.map(function(b){
+  //     return b > .5 ? 1 : 0
+  //   })
+  // })
 
   return out;
 }
@@ -47,7 +47,7 @@ function probabilityToBinary(probArry) {
   //convert to binary
 
   for (var i = 0; i<5; i+=1) {
-    for (var thresh = .5; thresh < 1; thresh += .1) {
+    for (var thresh = .5; thresh > 0; thresh -= .1) {
       for (var j = 0; j<12; j+=1) {
         binary[i][j] = probArry[i][j] > thresh ? 1 : 0;
       }
@@ -79,10 +79,10 @@ function playProg(prog){
   var chord = mask(notes, prog[0]);
   
   synth.triggerAttack(chord);
+  document.getElementById("chordNotesDisplay").innerHTML = prog[0];
+  document.getElementById("chordNameDisplay").innerHTML = hashedReverseDict[getPseudoHash(prog[0])] || "<unk>";
 
   setTimeout(function(){
-    document.getElementById("chordNotesDisplay").innerHTML = prog[0];
-    document.getElementById("chordNameDisplay").innerHTML = hashedReverseDict[getPseudoHash(prog[0])] || "<unk>";
     synth.triggerRelease(chord);
     playProg(prog.slice(1, prog.length));
   }, 1000);
@@ -90,6 +90,8 @@ function playProg(prog){
 
 function stopPlayback() {
   doStopPlayback = true;
+  document.getElementById("chordNotesDisplay").innerHTML = "Chord notes will be displayed here";
+    document.getElementById("chordNameDisplay").innerHTML = "Chord name will be displayed here";
   synth.releaseAll();
 }
 
