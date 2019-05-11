@@ -1,0 +1,21 @@
+.note-member{
+    color: green;
+    text-align: center;
+    text-transform: uppercase;
+}
+.note-diatonic {
+    color: orange;
+    text-align: center;
+    text-transform: uppercase;
+}
+.note-tendency {
+    color: red;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.chord {
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}

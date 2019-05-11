@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
 
   </head>
 
@@ -23,19 +24,29 @@
 
   <body onload="initModel()">
     <div class="container">
-      <h1>Chord Generator <small>by Paul Biberstein</small></h1>
-      <div id="chordNotesDisplay">
-        Chord notes will be displayed here
+      <div class="column">
+        <h1>Chord Generator <small>by Paul Biberstein</small></h1>
       </div>
-      <div id="chordNameDisplay">
-        Chord name will be displayed here
+      <div class="row">
+        <div class="col-md-6">
+          <p id="chordNotesDisplay">
+            Chord notes will be displayed here
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p id="chordNameDisplay">
+            Chord name will be displayed here
+          </p>
+        </div>
       </div>
-      <button onclick="generateProg()">
-        click here to play
-      </button>
-      <button onclick="stopPlayback()">
-        click here to stop
-      </button>
+      <div class="column">
+        <button type="button" class="btn btn-success btn-large btn-block" onclick="generateProg()">
+          click here to play
+        </button>
+        <button type="button" class="btn btn-danger btn-block" onclick="stopPlayback()">
+          click here to stop
+        </button>
+      </div>
     </div>
   </body>
 </html>

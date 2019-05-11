@@ -33,12 +33,6 @@ function shapeModelOutput(raw){
 
   out = probabilityToBinary(out);
 
-  // out = out.map(function(a){
-  //   return a.map(function(b){
-  //     return b > .5 ? 1 : 0
-  //   })
-  // })
-
   return out;
 }
 
