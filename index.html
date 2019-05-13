@@ -22,31 +22,62 @@
   <script src="main.js"></script>
   <script src="util.js"></script>
 
-  <body onload="initModel()">
+  <body onload="init()">
     <div class="container">
       <div class="column">
         <h1>Chord Generator <small>by Paul Biberstein</small></h1>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <p id="chordNotesDisplay">
-            Chord notes will be displayed here
-          </p>
+
+      <div class="row" id="chordMembersRow">
+        <div class="col-md-6 chordMembersCol" id="chordMembers0">
+          Chord members 1 here
         </div>
-        <div class="col-md-6">
-          <p id="chordNameDisplay">
-            Chord name will be displayed here
-          </p>
+        <div class="col-md-6 chordMembersCol" id="chordMembers1">
+          Chord members 2 here
         </div>
       </div>
+
+      <div class="row" id="chordNameRow">
+        <div class="col-md-6 chordNamesCol" id="chordName0">
+          Chord name 1 will be displayed here
+        </div>
+        <div class="col-md-6 chordNamesCol" id="chordName1">
+          Chord name 2 will be displayed here
+        </div>
+      </div>
+
       <div class="column">
-        <button type="button" class="btn btn-success btn-large btn-block" onclick="generateProg()">
-          click here to play
-        </button>
+        
+        <div class="row">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-success btn-large btn-block" onclick="generateProg()">
+                Generate New Progression
+            </button>  
+          </div>
+          <div class="col-md-6">
+            <button type="button" class="btn btn-success btn-large btn-block" onclick="playProg()">
+              Play Current Progression
+            </button>
+          </div>
+        </div>
+
         <button type="button" class="btn btn-danger btn-block" onclick="stopPlayback()">
           click here to stop
         </button>
       </div>
+      <br>
+      <div class="column">
+        <h2>
+          How do I use This?
+        </h2>
+        <p>
+          To generate a new progression, click the green button on the left. To play it, click the green button on the right. This will play each chord in the progression for two seconds each. If you want to stop playback early, press the red button.
+        </p>
+        <p>
+          While the progression is playing, the currently playing chord will be displayed on the left, with its chordal members above. The next chord to be played will be displayed on the right.
+        </p>
+      </div>
+
     </div>
   </body>
 </html>

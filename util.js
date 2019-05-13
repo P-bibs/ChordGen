@@ -6,7 +6,9 @@ function Get(yourUrl){
 }
 
 function mask (data, mask) {
-  return data.filter((item, i) => mask[i]);
+  return data.filter(
+    (item, i) => mask[i]
+  );
 }
 
 function getPseudoHash(arry){
@@ -22,4 +24,12 @@ function getPseudoHash(arry){
 
 function temp() {
   getPseudoHash([1,0,0,0,0,1,0,0,0,0,1,1])
+}
+
+function reshape(arr, x, y) {
+  var out = []
+  for (var i=0; i<x; i+=1) {
+    out[i] = arr.slice(y*i, y*(i+1))
+  }
+  return out
 }
