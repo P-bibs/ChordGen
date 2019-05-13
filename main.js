@@ -14,8 +14,9 @@ var currentChordIndex;
 var playbackTimer;
 
 var settings = {
-  chordsPerProg: 6,
-  minimumChordalMembers: 3
+  chordsPerProg: 5,
+  minimumChordalMembers: 3,
+  noteDuration: 2
 }
 
 async function init(){
@@ -97,7 +98,7 @@ function playProg(){
     synth.releaseAll();
     playCurrentChord();
     
-  }, 2000)
+  }, settings.noteDuration * 1000)
 }
 
 function playCurrentChord() {
@@ -139,4 +140,11 @@ function stopPlayback() {
     synth.releaseAll();
     //synth.dispose();
   }
+}
+
+function saveConfig() {
+  settings.chordsPerProg = document.getElementById("chordsPerProg").value;
+  settings.minimumChordalMembers= document.getElementById("minimumChordalMembers").value;
+  settings.noteDuration = document.getElementById("noteDuration").value;
+
 }

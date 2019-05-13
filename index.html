@@ -65,7 +65,32 @@
           click here to stop
         </button>
       </div>
+
       <br>
+
+      <div class="column">
+        <h2>
+          Configuration
+        </h2>
+        <p>
+          Number of Chords per Progression
+          <input type="number" class="form-control" id="chordsPerProg" value="5">
+        </p>
+        <p>
+          Minimum Chordal Members
+          <input type="number" class="form-control" id="minimumChordalMembers" value="3">
+        </p>
+        <p>
+          Seconds to Play Each Note
+          <input type="number" class="form-control" id="noteDuration" value="2">
+        </p>
+        <button class="btn btn-primary" onclick="saveConfig()">
+          Save
+        </button>
+      </div>
+
+      <br>
+
       <div class="column">
         <h2>
           How do I use This?
