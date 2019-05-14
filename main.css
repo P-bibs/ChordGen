@@ -31,3 +31,8 @@
     text-align: center;
     font-weight: bold;
 }
+
+.big-checkbox {
+    width: 25px;
+    height: 25px;
+}

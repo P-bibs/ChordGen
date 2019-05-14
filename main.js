@@ -3,20 +3,22 @@ var hashedReverseDict;
 
 var synth;
 
-var currentProg = [
+var defaultProg = [
   [1,0,0,0,0,0,0,1,0,0,0,0],
   [1,0,0,0,1,0,0,1,0,1,0,0],
   [1,0,0,0,0,0,0,1,0,1,0,0],
   [1,0,1,0,0,1,0,1,0,1,0,0],
   [0,0,1,0,0,1,0,1,0,0,0,1]
 ]
+var currentProg;
 var currentChordIndex;
 var playbackTimer;
 
 var settings = {
   chordsPerProg: 5,
   minimumChordalMembers: 3,
-  noteDuration: 2
+  noteDuration: 2,
+  loopPlayback: true
 }
 
 async function init(){
@@ -31,7 +33,7 @@ function generateProg(){
   newProg = [];
 
   while (newProg.length < settings.chordsPerProg) {
-    data = currentProg.concat(newProg).slice(-5);
+    data = defaultProg.concat(currentProg).concat(newProg).slice(-5);      
     var prediction = model.predict(tf.tensor([data]));    
     shapeModelOutput(prediction).forEach(function(a){
       newProg.push(a);
@@ -104,6 +106,9 @@ function playProg(){
 function playCurrentChord() {
   if (currentChordIndex + 1 > settings.chordsPerProg) {
     stopPlayback();
+    if (settings.loopPlayback) {
+      playProg();
+    }
     return;
   }
 
@@ -146,5 +151,5 @@ function saveConfig() {
   settings.chordsPerProg = document.getElementById("chordsPerProg").value;
   settings.minimumChordalMembers= document.getElementById("minimumChordalMembers").value;
   settings.noteDuration = document.getElementById("noteDuration").value;
-
+  settings.loopPlayback = document.getElementById("noteDuration").value === "on" ? true : false;
 }
