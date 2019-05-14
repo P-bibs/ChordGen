@@ -33,3 +33,36 @@ function reshape(arr, x, y) {
   }
   return out
 }
+
+function shuffle(a) {
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = a[i];
+      a[i] = a[j];
+      a[j] = x;
+  }
+  return a;
+}
+
+function generateRandomProg(length, minChordalMembers) {
+  prog = []
+
+  for (var i = 0; i<length; i+=1){
+    rand = Math.random();
+    if (rand <= .5) count = minChordalMembers;
+    else if (rand >= .75) count = minChordalMembers + 1;
+    else count = minChordalMembers + 1;
+
+    arr = [...Array(12).keys()];
+    arr = arr.map((item, i) => 
+      i<count ? 1 : 0
+    );
+    arr = shuffle(arr);
+
+    prog.push(arr);
+  }
+
+  return prog
+
+}

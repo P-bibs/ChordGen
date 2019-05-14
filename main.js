@@ -3,14 +3,8 @@ var hashedReverseDict;
 
 var synth;
 
-var defaultProg = [
-  [1,0,0,0,0,0,0,1,0,0,0,0],
-  [1,0,0,0,1,0,0,1,0,1,0,0],
-  [1,0,0,0,0,0,0,1,0,1,0,0],
-  [1,0,1,0,0,1,0,1,0,1,0,0],
-  [0,0,1,0,0,1,0,1,0,0,0,1]
-]
-var currentProg;
+var currentProg = [];
+var seed = []
 var currentChordIndex;
 var playbackTimer;
 
@@ -18,12 +12,13 @@ var settings = {
   chordsPerProg: 5,
   minimumChordalMembers: 3,
   noteDuration: 2,
-  loopPlayback: true
+  loopPlayback: false
 }
 
 async function init(){
   model = await tf.loadLayersModel('http://localhost:8081/model.json');
   hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
+  seed = generateRandomProg(5, settings.minimumChordalMembers);
   generateProg();
 }
 
@@ -33,7 +28,8 @@ function generateProg(){
   newProg = [];
 
   while (newProg.length < settings.chordsPerProg) {
-    data = defaultProg.concat(currentProg).concat(newProg).slice(-5);      
+    seed = generateRandomProg(5, settings.minimumChordalMembers);
+    data = seed.concat(newProg).slice(-5);      
     var prediction = model.predict(tf.tensor([data]));    
     shapeModelOutput(prediction).forEach(function(a){
       newProg.push(a);
@@ -151,5 +147,6 @@ function saveConfig() {
   settings.chordsPerProg = document.getElementById("chordsPerProg").value;
   settings.minimumChordalMembers= document.getElementById("minimumChordalMembers").value;
   settings.noteDuration = document.getElementById("noteDuration").value;
+  settings.key = document.getElementById("keySelect").value;
   settings.loopPlayback = document.getElementById("noteDuration").value === "on" ? true : false;
 }
