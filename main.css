@@ -1,13 +1,18 @@
-.chordNamesCol {
+.chord-names-col {
     background-color: white;
     text-align: center;
 }
-.chordMembersCol {
+.chord-members-col {
     font-size: 30px;
     text-align: center;
     word-wrap: break-word;
     background-color: white;
     height: 200px;
+}
+
+.start-text {
+    font-size: 30px;
+    text-align: center;
 }
 
 .note-member{

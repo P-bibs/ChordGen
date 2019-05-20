@@ -19,6 +19,7 @@
   <script src="http://chancejs.com/chance.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+  <script type="module">import * as PyChordParser from './__target__/PyChordParser.js'; window.PyChordParser = PyChordParser;</script>
   <script src="main.js"></script>
   <script src="util.js"></script>
 
@@ -28,21 +29,14 @@
         <h1>Chord Generator <small>by Paul Biberstein</small></h1>
       </div>
 
-      <div class="row" id="chordMembersRow">
-        <div class="col-md-6 chordMembersCol" id="chordMembers0">
-          Chord members 1 here
-        </div>
-        <div class="col-md-6 chordMembersCol" id="chordMembers1">
-          Chord members 2 here
-        </div>
-      </div>
-
-      <div class="row" id="chordNameRow">
-        <div class="col-md-6 chordNamesCol" id="chordName0">
-          Chord name 1 will be displayed here
-        </div>
-        <div class="col-md-6 chordNamesCol" id="chordName1">
-          Chord name 2 will be displayed here
+      <div id="progContainer">
+        <div class="row">
+          <div class="column start-text">
+            <br>
+            Click "Generate New Progression" to Start
+            <br>
+            <br>
+          </div>
         </div>
       </div>
 
@@ -88,12 +82,12 @@
         <label class="form-check-label" for="loopPlayback">Loop Playback</label>
         <br>
         <input class="form-check-input big-checkbox" type="checkbox" id="loopPlayback">
-        
-        <br>
+
         <br>
 
-        <button class="btn btn-primary" onclick="saveConfig()">Save Settings</button>
-
+        <label class="form-check-label" for="onlyNamedChords">Only Use Namable Chords</label>
+        <br>
+        <input class="form-check-input big-checkbox" type="checkbox" checked id="onlyNamedChords">
       </div>
 
       <br>
@@ -109,7 +103,6 @@
           While the progression is playing, the currently playing chord will be displayed on the left, with its chordal members above. The next chord to be played will be displayed on the right.
         </p>
       </div>
-
     </div>
   </body>
 </html>
