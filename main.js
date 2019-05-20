@@ -197,13 +197,18 @@ function writeProgToHtml() {
   }
 
   var rows = []
-  for (let i = 0; i < tiles.length; i += 3) {
-    currentLine = tiles.slice(i, i + 3);
+  for (let i = 0; i < tiles.length; i += 2) {
+    currentLine = tiles.slice(i, i + 2);
 
     var row = document.createElement("div")
     row.setAttribute("class", "row")
-    currentLine.forEach(a => row.appendChild(a))
+    row.appendChild(currentLine[0])
+    if (currentLine[1]) {
+      currentLine[1].classList.add("col-md-offset-2")
+      row.appendChild(currentLine[1])
+    }
     rows.push(row)
+    rows.push(document.createElement("br"))
   }
 
   node = document.getElementById("progContainer");
@@ -218,7 +223,7 @@ function writeProgToHtml() {
 
 function makeChordTile(members, name) {
   var topNode = document.createElement("div")
-  topNode.setAttribute("class", "col-md-4 chord-tile chord-tile-inactive")
+  topNode.setAttribute("class", "col-md-5 chord-tile chord-tile-inactive")
 
   var row1 = document.createElement("div")
   row1.setAttribute("class", "row")
