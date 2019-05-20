@@ -143,6 +143,10 @@ function playCurrentChord() {
 
   console.log("attack triggered: " + currentProgMembers[currentChordIndex] + " " + currentChordIndex);
   synth.triggerAttack(currentProgMembers[currentChordIndex].map(a => a + "4"));
+
+  var currentTile = document.getElementsByClassName("chord-tile")[currentChordIndex]
+  currentTile.classList.add("chord-tile-active")
+  currentTile.classList.remove("chord-tile-inactive")
 }
 
 function stopPlayback() {
@@ -153,6 +157,12 @@ function stopPlayback() {
 
     synth.releaseAll();
   }
+
+  tiles = Array.from(document.getElementsByClassName("chord-tile"));
+  tiles.forEach(function (a) {
+    a.classList.remove("chord-tile-active");
+    a.classList.add("chord-tile-inactive");
+  });
 }
 
 function determineChordalMembersAndNames() {
@@ -208,19 +218,19 @@ function writeProgToHtml() {
 
 function makeChordTile(members, name) {
   var topNode = document.createElement("div")
-  topNode.setAttribute("class", "col-md-4")
+  topNode.setAttribute("class", "col-md-4 chord-tile chord-tile-inactive")
 
   var row1 = document.createElement("div")
   row1.setAttribute("class", "row")
   var membersDiv = document.createElement("div")
-  membersDiv.setAttribute("class", "column chord-members-col")
-  membersDiv.appendChild(document.createTextNode(members.map(a => a + "\n").toString().replace(/,/g, "")))
+  membersDiv.setAttribute("class", "column chord-members")
+  membersDiv.appendChild(document.createTextNode(members.map(a => a + "").toString().replace(/,/g, "\n")))
   row1.appendChild(membersDiv);
 
   var row2 = document.createElement("div")
   row2.setAttribute("class", "row")
   var nameDiv = document.createElement("div");
-  nameDiv.setAttribute("class", "column chord-names-col")
+  nameDiv.setAttribute("class", "column chord-name")
   nameDiv.appendChild(document.createTextNode(name))
   row2.appendChild(nameDiv);
 
