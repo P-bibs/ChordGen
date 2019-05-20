@@ -7,22 +7,44 @@
     font-size: 30px;
     text-align: center;
     word-wrap: break-word;
-    height: 200px;
     white-space: pre;
 }
 
-.chord-tile {}
+.chord-tile {
+    border-radius: 25px;
+}
 
 .chord-tile-active {
     background: rgb(204, 204, 204);
     color: black;
-    border-radius: 25px
 }
 
 .chord-tile-inactive {
     background: rgb(236, 236, 236);
     color: rgb(88, 88, 88);
-    border-radius: 25px
+}
+
+@keyframes bar-anim {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.tile-progress-inner {
+    width: 0%;
+    height: 30px;
+    background-color: rgb(2, 117, 216);
+}
+
+.tile-progress-anim {
+    animation-name: bar-anim;
+    animation-duration: 0s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }
 
 .start-text {

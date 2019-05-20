@@ -147,6 +147,10 @@ function playCurrentChord() {
   var currentTile = document.getElementsByClassName("chord-tile")[currentChordIndex]
   currentTile.classList.add("chord-tile-active")
   currentTile.classList.remove("chord-tile-inactive")
+
+  var bar = document.getElementsByClassName("tile-progress-inner")[currentChordIndex];
+  bar.classList.add("tile-progress-anim");
+  bar.style.animationDuration = settings.noteDuration + "s";
 }
 
 function stopPlayback() {
@@ -158,11 +162,7 @@ function stopPlayback() {
     synth.releaseAll();
   }
 
-  tiles = Array.from(document.getElementsByClassName("chord-tile"));
-  tiles.forEach(function (a) {
-    a.classList.remove("chord-tile-active");
-    a.classList.add("chord-tile-inactive");
-  });
+  writeProgToHtml();
 }
 
 function determineChordalMembersAndNames() {
@@ -239,8 +239,25 @@ function makeChordTile(members, name) {
   nameDiv.appendChild(document.createTextNode(name))
   row2.appendChild(nameDiv);
 
+  var row3 = document.createElement("div")
+  row3.classList.add("row")
+  var outer = document.createElement("div")
+  outer.classList.add("column")
+  outer.classList.add("progress")
+
+  var inner = document.createElement("div")
+  inner.setAttribute("class", "progress-bar tile-progress-inner")
+  inner.setAttribute("role", "progressbar")
+  inner.setAttribute("aria-valuenow", "0")
+  inner.setAttribute("aria-valuemin", "0")
+  inner.setAttribute("aria-valuemax", "100")
+
+  outer.appendChild(inner);
+  row3.appendChild(outer)
+
   topNode.appendChild(row1);
   topNode.appendChild(row2);
+  topNode.appendChild(row3);
 
   return topNode;
 }
