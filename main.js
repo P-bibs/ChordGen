@@ -18,7 +18,7 @@ var settings = {
   onlyNamedChords: true
 }
 
-async function init(){
+async function init() {
   model = await tf.loadLayersModel('http://localhost:8081/model.json');
   hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
   seed = generateRandomProg(5, settings.minimumChordalMembers);
@@ -26,38 +26,38 @@ async function init(){
   generateProg();
 }
 
-function addConfigEventListeners(){
-  document.getElementById("chordsPerProg").addEventListener("input", function(a){
+function addConfigEventListeners() {
+  document.getElementById("chordsPerProg").addEventListener("input", function (a) {
     settings.chordsPerProg = this.value
   });
 
-  document.getElementById("minimumChordalMembers").addEventListener("input", function(a){
+  document.getElementById("minimumChordalMembers").addEventListener("input", function (a) {
     settings.minimumChordalMembers = this.value
   });
-  document.getElementById("noteDuration").addEventListener("input", function(a){
+  document.getElementById("noteDuration").addEventListener("input", function (a) {
     settings.noteDuration = this.value
   });
   // document.getElementById("keySelect").addEventListener("input", function(a){
   //   settings.key = this.value
   // });
-  document.getElementById("loopPlayback").addEventListener("change", function(a){
+  document.getElementById("loopPlayback").addEventListener("change", function (a) {
     settings.loopPlayback = document.getElementById("loopPlayback").checked;
   });
-  document.getElementById("onlyNamedChords").addEventListener("change", function(a){
+  document.getElementById("onlyNamedChords").addEventListener("change", function (a) {
     settings.onlyNamedChords = document.getElementById("onlyNamedChords").checked;
   });
 }
 
-function generateProg(){
+function generateProg() {
   stopPlayback();
 
   newProg = [];
 
   while (newProg.length < settings.chordsPerProg) {
     seed = generateRandomProg(5, settings.minimumChordalMembers);
-    data = seed.concat(newProg).slice(-5);      
-    var prediction = model.predict(tf.tensor([data]));    
-    shapeModelOutput(prediction).forEach(function(a){
+    data = seed.concat(newProg).slice(-5);
+    var prediction = model.predict(tf.tensor([data]));
+    shapeModelOutput(prediction).forEach(function (a) {
       newProg.push(a);
     });
   }
@@ -75,7 +75,7 @@ function generateProg(){
   writeProgToHtml();
 }
 
-function shapeModelOutput(raw){
+function shapeModelOutput(raw) {
   // turn tensor into array (blocking)
   // TODO: make async
   var arr = raw.as1D().dataSync();
@@ -90,19 +90,19 @@ function shapeModelOutput(raw){
 
 function probabilityToBinary(probArry) {
   var binary = [];
-  for (let i = 0; i < 5; i+=1) {
+  for (let i = 0; i < 5; i += 1) {
     binary[i] = [];
   }
 
   //convert to binary
-  for (let i = 0; i<5; i+=1) {
+  for (let i = 0; i < 5; i += 1) {
     for (var thresh = .5; thresh > 0; thresh -= .1) {
-      for (var j = 0; j<12; j+=1) {
+      for (var j = 0; j < 12; j += 1) {
         binary[i][j] = probArry[i][j] > thresh ? 1 : 0;
       }
       // Count number of '1's in array. If greater than min,
       // then stop increasing threshold and continue.
-      if (binary[i].reduce( (a,b) => a+b ) >= settings.minimumChordalMembers){
+      if (binary[i].reduce((a, b) => a + b) >= settings.minimumChordalMembers) {
         break;
       }
     }
@@ -111,24 +111,24 @@ function probabilityToBinary(probArry) {
   return binary;
 }
 
-function playProg(){
+function playProg() {
   stopPlayback();
 
   voiceCount = 0;
-  for (let i = 0; i < currentProg.length; i+=1) {
-    if (currentProg[i].reduce((a,b) => a+b) > voiceCount) {
-      voiceCount = currentProg[i].reduce((a,b) => a+b);
+  for (let i = 0; i < currentProg.length; i += 1) {
+    if (currentProg[i].reduce((a, b) => a + b) > voiceCount) {
+      voiceCount = currentProg[i].reduce((a, b) => a + b);
     }
   }
   synth = new Tone.PolySynth(voiceCount, Tone.synth).toMaster();
 
   playCurrentChord();
 
-  playbackTimer = setInterval(function(){
+  playbackTimer = setInterval(function () {
     currentChordIndex += 1;
     synth.releaseAll();
     playCurrentChord();
-    
+
   }, settings.noteDuration * 1000)
 }
 
@@ -146,7 +146,7 @@ function playCurrentChord() {
 }
 
 function stopPlayback() {
-  if (synth){
+  if (synth) {
     clearInterval(playbackTimer);
 
     currentChordIndex = 0;
@@ -158,7 +158,7 @@ function stopPlayback() {
 function determineChordalMembersAndNames() {
   currentProgNames = [];
   for (let i = 0; i < currentProg.length; i++) {
-    var name = hashedReverseDict[getPseudoHash(currentProg[i])] || "<unk>";    
+    var name = hashedReverseDict[getPseudoHash(currentProg[i])] || "<unk>";
     currentProgNames.push(name);
   }
 
@@ -168,8 +168,7 @@ function determineChordalMembersAndNames() {
       var notes = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
       var chord = mask(notes, currentProg[i]);
       currentProgMembers.push(chord)
-    }
-    else {
+    } else {
       var chord = PyChordParser.parseChord(currentProgNames[i][0])
       var notes = chord.getSpelling();
 
@@ -188,8 +187,8 @@ function writeProgToHtml() {
   }
 
   var rows = []
-  for (let i=0; i<tiles.length; i+=3){
-    currentLine = tiles.slice(i,i+3);
+  for (let i = 0; i < tiles.length; i += 3) {
+    currentLine = tiles.slice(i, i + 3);
 
     var row = document.createElement("div")
     row.setAttribute("class", "row")
@@ -215,7 +214,7 @@ function makeChordTile(members, name) {
   row1.setAttribute("class", "row")
   var membersDiv = document.createElement("div")
   membersDiv.setAttribute("class", "column chord-members-col")
-  membersDiv.appendChild(document.createTextNode(members.map(a => a+"\n").toString().replace(/,/g, "")))
+  membersDiv.appendChild(document.createTextNode(members.map(a => a + "\n").toString().replace(/,/g, "")))
   row1.appendChild(membersDiv);
 
   var row2 = document.createElement("div")
@@ -224,7 +223,7 @@ function makeChordTile(members, name) {
   nameDiv.setAttribute("class", "column chord-names-col")
   nameDiv.appendChild(document.createTextNode(name))
   row2.appendChild(nameDiv);
-  
+
   topNode.appendChild(row1);
   topNode.appendChild(row2);
 

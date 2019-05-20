@@ -2,6 +2,7 @@
     background-color: white;
     text-align: center;
 }
+
 .chord-members-col {
     font-size: 30px;
     text-align: center;
@@ -15,16 +16,18 @@
     text-align: center;
 }
 
-.note-member{
+.note-member {
     color: green;
     text-align: center;
     text-transform: uppercase;
 }
+
 .note-diatonic {
     color: orange;
     text-align: center;
     text-transform: uppercase;
 }
+
 .note-tendency {
     color: red;
     text-align: center;

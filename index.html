@@ -1,108 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Chord Generator</title>
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
 
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Chord Generator</title>
+  <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
 
-  <!-- Libraries-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.8.3/Tone.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://chancejs.com/chance.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
-  <script type="module">import * as PyChordParser from './__target__/PyChordParser.js'; window.PyChordParser = PyChordParser;</script>
-  <script src="main.js"></script>
-  <script src="util.js"></script>
+</head>
 
-  <body onload="init()">
-    <div class="container">
-      <div class="column">
-        <h1>Chord Generator <small>by Paul Biberstein</small></h1>
-      </div>
+<!-- Libraries-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.8.3/Tone.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://chancejs.com/chance.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+<script type="module">
+  import * as PyChordParser from './__target__/PyChordParser.js'; window.PyChordParser = PyChordParser;</script>
+<script src="main.js"></script>
+<script src="util.js"></script>
 
-      <div id="progContainer">
-        <div class="row">
-          <div class="column start-text">
-            <br>
-            Click "Generate New Progression" to Start
-            <br>
-            <br>
-          </div>
+<body onload="init()">
+  <div class="container">
+    <div class="column">
+      <h1>Chord Generator <small>by Paul Biberstein</small></h1>
+    </div>
+
+    <div id="progContainer">
+      <div class="row">
+        <div class="column start-text">
+          <br>
+          Click "Generate New Progression" to Start
+          <br>
+          <br>
         </div>
-      </div>
-
-      <div class="column">
-        
-        <div class="row">
-          <div class="col-md-6">
-            <button type="button" class="btn btn-success btn-large btn-block" onclick="generateProg()">
-                Generate New Progression
-            </button>  
-          </div>
-          <div class="col-md-6">
-            <button type="button" class="btn btn-success btn-large btn-block" onclick="playProg()">
-              Play Current Progression
-            </button>
-          </div>
-        </div>
-
-        <button type="button" class="btn btn-danger btn-block" onclick="stopPlayback()">
-          click here to stop
-        </button>
-      </div>
-
-      <br>
-
-      <div class="column">
-        <h2>
-          Configuration
-        </h2>
-
-        <label for="chordsPerProg">Number of Chords per Progression</label>
-        <input type="number" class="form-control" id="chordsPerProg" value="5">
-        <br>
-
-        <label for="minimumChordalMembers">Minimum Chordal Members</label>
-        <input type="number" class="form-control" id="minimumChordalMembers" value="3">
-        <br>
-
-        <label for="noteDuration">Seconds to Play Each Note</label>
-        <input type="number" class="form-control" id="noteDuration" value="2">
-        <br>
-
-        <label class="form-check-label" for="loopPlayback">Loop Playback</label>
-        <br>
-        <input class="form-check-input big-checkbox" type="checkbox" id="loopPlayback">
-
-        <br>
-
-        <label class="form-check-label" for="onlyNamedChords">Only Use Namable Chords</label>
-        <br>
-        <input class="form-check-input big-checkbox" type="checkbox" checked id="onlyNamedChords">
-      </div>
-
-      <br>
-
-      <div class="column">
-        <h2>
-          How do I use This?
-        </h2>
-        <p>
-          To generate a new progression, click the green button on the left. To play it, click the green button on the right. This will play each chord in the progression for two seconds each. If you want to stop playback early, press the red button.
-        </p>
-        <p>
-          While the progression is playing, the currently playing chord will be displayed on the left, with its chordal members above. The next chord to be played will be displayed on the right.
-        </p>
       </div>
     </div>
-  </body>
+
+    <div class="column">
+
+      <div class="row">
+        <div class="col-md-6">
+          <button type="button" class="btn btn-success btn-large btn-block" onclick="generateProg()">
+            Generate New Progression
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button type="button" class="btn btn-success btn-large btn-block" onclick="playProg()">
+            Play Current Progression
+          </button>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-danger btn-block" onclick="stopPlayback()">
+        click here to stop
+      </button>
+    </div>
+
+    <br>
+
+    <div class="column">
+      <h2>
+        Configuration
+      </h2>
+
+      <label for="chordsPerProg">Number of Chords per Progression</label>
+      <input type="number" class="form-control" id="chordsPerProg" value="5">
+      <br>
+
+      <label for="minimumChordalMembers">Minimum Chordal Members</label>
+      <input type="number" class="form-control" id="minimumChordalMembers" value="3">
+      <br>
+
+      <label for="noteDuration">Seconds to Play Each Note</label>
+      <input type="number" class="form-control" id="noteDuration" value="2">
+      <br>
+
+      <label class="form-check-label" for="loopPlayback">Loop Playback</label>
+      <br>
+      <input class="form-check-input big-checkbox" type="checkbox" id="loopPlayback">
+
+      <br>
+
+      <label class="form-check-label" for="onlyNamedChords">Only Use Namable Chords</label>
+      <br>
+      <input class="form-check-input big-checkbox" type="checkbox" checked id="onlyNamedChords">
+    </div>
+
+    <br>
+
+    <div class="column">
+      <h2>
+        How do I use This?
+      </h2>
+      <p>
+        To generate a new progression, click the green button on the left. To play it, click the green button on the
+        right. This will play each chord in the progression for two seconds each. If you want to stop playback early,
+        press the red button.
+      </p>
+      <p>
+        While the progression is playing, the currently playing chord will be displayed on the left, with its chordal
+        members above. The next chord to be played will be displayed on the right.
+      </p>
+    </div>
+  </div>
+</body>
+
 </html>
