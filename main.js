@@ -37,6 +37,20 @@ function addConfigEventListeners() {
   document.getElementById("noteDuration").addEventListener("input", function (a) {
     settings.noteDuration = this.value
   });
+  document.getElementById("progInputBtn").addEventListener("click", function (a) {
+    chords = this.value.split(" ");
+    chords = document.getElementById("progInput").value.split(" ");
+    currentProg = []
+    chords.forEach(function (a) {
+      currentProg.push(PyChordParser.parseChord(a).getNoteArray());
+    });
+
+    settings.chordsPerProg = currentProg.length
+    stopPlayback();
+    currentChordIndex = 0;
+    determineChordalMembersAndNames();
+    writeProgToHtml();
+  });
   // document.getElementById("keySelect").addEventListener("input", function(a){
   //   settings.key = this.value
   // });
@@ -73,6 +87,10 @@ function generateProg() {
   currentChordIndex = 0;
 
   writeProgToHtml();
+
+  document.getElementById("progInput").value = currentProg.map(a =>
+    hashedReverseDict[getPseudoHash(a)]
+  ).join(" ")
 }
 
 function shapeModelOutput(raw) {
