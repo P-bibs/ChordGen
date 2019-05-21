@@ -111,7 +111,7 @@ function probabilityToBinary(probArry) {
   return binary;
 }
 
-function playProg() {
+function playProg(startIndex = 0) {
   stopPlayback();
 
   voiceCount = 0;
@@ -121,6 +121,8 @@ function playProg() {
     }
   }
   synth = new Tone.PolySynth(voiceCount, Tone.synth).toMaster();
+
+  currentChordIndex = startIndex
 
   playCurrentChord();
 
@@ -258,6 +260,11 @@ function makeChordTile(members, name) {
   topNode.appendChild(row1);
   topNode.appendChild(row2);
   topNode.appendChild(row3);
+
+  topNode.addEventListener("click", function(e){
+    var tiles = Array.from(document.getElementsByClassName("chord-tile"));
+    playProg(tiles.indexOf(this));
+  });
 
   return topNode;
 }
