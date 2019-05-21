@@ -84,3 +84,4 @@ typings/
 .dynamodb/
 
 temp.js
+hashedReverseDict_old.json
