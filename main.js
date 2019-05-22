@@ -19,8 +19,20 @@ var settings = {
 }
 
 async function init() {
-  model = await tf.loadLayersModel('http://localhost:8081/model.json');
-  hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
+  try {
+    model = await tf.loadLayersModel('http://134.209.209.28:80/model.json');
+  }
+  catch(err) {
+    model = await tf.loadLayersModel('http://localhost:8081/model.json');
+  }
+
+  try {
+  hashedReverseDict = JSON.parse(Get('http://134.209.209.28:80/hashedReverseDict.json'));
+  }
+  catch(err) {
+    hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
+  }
+
   seed = generateRandomProg(5, settings.minimumChordalMembers);
   addConfigEventListeners();
   generateProg();
@@ -58,7 +70,7 @@ function addConfigEventListeners() {
     settings.loopPlayback = document.getElementById("loopPlayback").checked;
   });
   document.getElementById("onlyNamedChords").addEventListener("change", function (a) {
-    settings.onlyNamedChords = document.getElementById("onlyNamedChords").checked;
+    settings.onlyNamedChords = !(document.getElementById("onlyNamedChords").checked);
   });
 }
 
