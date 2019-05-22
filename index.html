@@ -88,7 +88,7 @@
       <input type="number" class="form-control" id="minimumChordalMembers" value="3">
       <br>
 
-      <label for="noteDuration">Seconds to Play Each Note</label>
+      <label for="noteDuration">Seconds to Play Each Chord</label>
       <input type="number" class="form-control" id="noteDuration" value="2">
       <br>
 
@@ -98,9 +98,9 @@
 
       <br>
 
-      <label class="form-check-label" for="onlyNamedChords">Only Use Namable Chords</label>
+      <label class="form-check-label" for="onlyNamedChords"><b style="color: red;">Experimental: </b>Use Un-Nameable Chords</label>
       <br>
-      <input class="form-check-input big-checkbox" type="checkbox" checked id="onlyNamedChords">
+      <input class="form-check-input big-checkbox" type="checkbox" id="onlyNamedChords">
     </div>
 
     <br>
@@ -110,13 +110,33 @@
         How do I use This?
       </h2>
       <p>
-        To generate a new progression, click the green button on the left. To play it, click the green button on the
-        right. This will play each chord in the progression for two seconds each. If you want to stop playback early,
-        press the red button.
+          To generate a new progression, click the green button on the left. To play it, click the green button on the right. This will play each chord in the progression for the duration specified in the configuration section. If you want to stop playback early, press the red button. If you want to start playback at a specific chord, click that chord's tile.
       </p>
       <p>
-        While the progression is playing, the currently playing chord will be displayed on the left, with its chordal
-        members above. The next chord to be played will be displayed on the right.
+          While the progression is playing, The currently playing chord will have a progress bar that ticks up to show the remaining time that chord will be played for. Yet to be played chords are greyed out while already played chords have full progress bars.
+      </p>
+      <p>
+        <b>
+          Some settings are available to configure. Learn about them below
+        </b>
+      </p>
+      <p>
+        <b>Chord Input</b> - If you have your own progression you want to input for playback, enter it here and press 'Apply.' Alternatively, if you like the generated progression but just wanted to tweak it a little, apply those tweaks here and press 'Apply.'
+      </p>
+      <p>
+        <b>Number of Chords Per Progression</b> - Choose the number of chords a generated progression should have.
+      </p>
+      <p>
+        <b>Minimum Chordal Members</b> - pick the minimum amount of notes in generated chords. There will still be chords with more notes, but never chords with less. This setting can be a way to increase the relative 'complexity' of the chords in the progression.
+      </p>
+      <p>
+        <b>Seconds to Play Each Chord</b> - Duration in seconds to play each chord. Decimal values are supported.
+      </p>
+      <p>
+        <b>Loop Playback</b> - Check this box to have playback immediately start over from the beginning when the progression finishes.
+      </p>
+      <p>
+        <b>Use Un-Nameable Chords</b> - This feature is experimental. By default, the generator will only use chords that can be resolved to human readable names. Disabling this will possibly introduce more exciting and exotic chords into your progression, but will cause some other features to break.
       </p>
     </div>
   </div>
