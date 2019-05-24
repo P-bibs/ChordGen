@@ -17,11 +17,25 @@
 .chord-tile-active {
     background: rgb(204, 204, 204);
     color: black;
+    box-shadow: 3px 3px 3px grey;
+    animation-name: tile-activate-anim;
+    animation-duration: .25s;
+    animation-timing-function: ease-out;
 }
 
 .chord-tile-inactive {
     background: rgb(236, 236, 236);
     color: rgb(88, 88, 88);
+    box-shadow: 7px 7px 4px grey;
+}
+
+@keyframes tile-activate-anim {
+    from {
+        box-shadow: 7px 7px 4px grey;
+    }
+    to {
+        box-shadow: 3px 3px 3px grey;
+    }
 }
 
 @keyframes bar-anim {
