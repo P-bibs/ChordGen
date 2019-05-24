@@ -14,7 +14,7 @@ var settings = {
   chordsPerProg: 5,
   minimumChordalMembers: 3,
   noteDuration: 2,
-  loopPlayback: false,
+  loopPlayback: true,
   onlyNamedChords: true
 }
 
@@ -62,6 +62,15 @@ function addConfigEventListeners() {
     currentChordIndex = 0;
     determineChordalMembersAndNames();
     writeProgToHtml();
+  });
+  document.getElementById("progSaveBtn").addEventListener("click", function (a) {
+    var inputForSaving =  document.getElementById("progInput");
+    inputForSaving.focus();
+    inputForSaving.select();
+
+    document.execCommand('copy');
+
+    showSnackbar("Copied to Clipboard", 3)
   });
   // document.getElementById("keySelect").addEventListener("input", function(a){
   //   settings.key = this.value

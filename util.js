@@ -66,3 +66,16 @@ function generateRandomProg(length, minChordalMembers) {
   return prog
 
 }
+
+function showSnackbar(msg, duration) {
+  // Get the snackbar DIV
+  var node = document.getElementById("snackbar");
+
+  node.innerHTML = msg;
+  node.classList.add("show")
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){
+    node.classList.remove("show");
+  }, duration * 1000);
+}
