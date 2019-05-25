@@ -23,15 +23,13 @@ var settings = {
 async function init() {
   try {
     model = await tf.loadLayersModel('http://134.209.209.28:80/model.json');
-  }
-  catch(err) {
+  } catch (err) {
     model = await tf.loadLayersModel('http://localhost:8081/model.json');
   }
 
   try {
-  hashedReverseDict = JSON.parse(Get('http://134.209.209.28:80/hashedReverseDict.json'));
-  }
-  catch(err) {
+    hashedReverseDict = JSON.parse(Get('http://134.209.209.28:80/hashedReverseDict.json'));
+  } catch (err) {
     hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
   }
 
@@ -67,7 +65,7 @@ function addConfigEventListeners() {
     writeProgToHtml();
   });
   document.getElementById("progSaveBtn").addEventListener("click", function (a) {
-    var inputForSaving =  document.getElementById("progInput");
+    var inputForSaving = document.getElementById("progInput");
     inputForSaving.focus();
     inputForSaving.select();
 
@@ -90,7 +88,7 @@ function changeInstrument(num) {
   if (playbackTimer !== undefined) {
     stopPlayback();
   }
-  
+
 
   var synths = [
     Tone.Synth,
@@ -127,8 +125,7 @@ function changeInstrument(num) {
   settings.instrument = instruments[num];
   if (num < 5) {
     settings.instrumentType = "monophonic";
-  }
-  else {
+  } else {
     settings.instrumentType = "sampler";
   }
 
@@ -136,33 +133,30 @@ function changeInstrument(num) {
     synth = new Tone.PolySynth(7, settings.instrument).toMaster();
     console.log("Monophonic synth made")
     console.log(settings.instrument);
-  }
-  else if (settings.instrumentType === "sampler") {
+  } else if (settings.instrumentType === "sampler") {
     synth = SampleLibrary.load({
       instruments: settings.instrument,
       baseUrl: "/tonejs-instruments/samples/"
     });
     console.log("Polyphonic synth made")
     console.log(settings.instrument);
-  }
-  else if (settings.instrumentType === "polyphonic" ) {
+  } else if (settings.instrumentType === "polyphonic") {
     synth = new settings.instrument().toMaster();
     console.log("Sampler synth made")
     console.log(settings.instrument);
-  }
-  else {
+  } else {
     console.log("ERROR: can't recognize instrument type")
   }
 
 
   // show keyboard on load //
-  Tone.Buffer.on('load', function() {
+  Tone.Buffer.on('load', function () {
     console.log("loading samples done")
     synth.toMaster();
   });
 
   // show error message on loading error
-  Tone.Buffer.on('error', function() {
+  Tone.Buffer.on('error', function () {
     console.log("I'm sorry, there has been an error loading the samples. This page works best on on the most up-to-date version of Chrome.");
   })
 
@@ -377,7 +371,7 @@ function makeChordTile(members, name) {
   topNode.appendChild(row2);
   topNode.appendChild(row3);
 
-  topNode.addEventListener("click", function(e){
+  topNode.addEventListener("click", function (e) {
     var tiles = Array.from(document.getElementsByClassName("chord-tile"));
     playProg(tiles.indexOf(this));
   });

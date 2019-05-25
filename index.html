@@ -6,7 +6,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140726324-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-140726324-1');
@@ -87,7 +90,7 @@
             <button type="button" onclick="changeInstrument(1)" class="btn btn-secondary btn-block">AM Synth</button>
           </div>
           <div class="col-md-2 instrument-button">
-              <button type="button" onclick="changeInstrument(2)" class="btn btn-secondary btn-block">Duo Synth</button>
+            <button type="button" onclick="changeInstrument(2)" class="btn btn-secondary btn-block">Duo Synth</button>
           </div>
           <div class="col-md-2 instrument-button">
             <button type="button" onclick="changeInstrument(3)" class="btn btn-secondary btn-block">FM Synth</button>
@@ -96,7 +99,8 @@
             <button type="button" onclick="changeInstrument(4)" class="btn btn-secondary btn-block">Mono Synth</button>
           </div>
           <div class="col-md-2 instrument-button">
-            <button type="button" onclick="changeInstrument(5)" class="btn btn-secondary btn-block">Electric Bass</button>
+            <button type="button" onclick="changeInstrument(5)" class="btn btn-secondary btn-block">Electric
+              Bass</button>
           </div>
         </div>
         <br>
@@ -108,7 +112,7 @@
             <button type="button" onclick="changeInstrument(7)" class="btn btn-secondary btn-block">Cello</button>
           </div>
           <div class="col-md-2 instrument-button">
-              <button type="button" onclick="changeInstrument(8)" class="btn btn-secondary btn-block">Clarinet</button>
+            <button type="button" onclick="changeInstrument(8)" class="btn btn-secondary btn-block">Clarinet</button>
           </div>
           <div class="col-md-2 instrument-button">
             <button type="button" onclick="changeInstrument(9)" class="btn btn-secondary btn-block">Contrabass</button>
@@ -117,19 +121,22 @@
             <button type="button" onclick="changeInstrument(10)" class="btn btn-secondary btn-block">Flute</button>
           </div>
           <div class="col-md-2 instrument-button">
-            <button type="button" onclick="changeInstrument(11)" class="btn btn-secondary btn-block">French Horn</button>
+            <button type="button" onclick="changeInstrument(11)" class="btn btn-secondary btn-block">French
+              Horn</button>
           </div>
         </div>
         <br>
         <div class="row">
           <div class="col-md-2 instrument-button">
-            <button type="button" onclick="changeInstrument(12)" class="btn btn-secondary btn-block">Acoustic Guitar</button>
+            <button type="button" onclick="changeInstrument(12)" class="btn btn-secondary btn-block">Acoustic
+              Guitar</button>
           </div>
           <div class="col-md-2 instrument-button">
-            <button type="button" onclick="changeInstrument(13)" class="btn btn-secondary btn-block">Electric Guitar</button>
+            <button type="button" onclick="changeInstrument(13)" class="btn btn-secondary btn-block">Electric
+              Guitar</button>
           </div>
           <div class="col-md-2 instrument-button">
-              <button type="button" onclick="changeInstrument(14)" class="btn btn-secondary btn-block">Harmonium</button>
+            <button type="button" onclick="changeInstrument(14)" class="btn btn-secondary btn-block">Harmonium</button>
           </div>
           <div class="col-md-2 instrument-button">
             <button type="button" onclick="changeInstrument(15)" class="btn btn-secondary btn-block">Harp</button>
@@ -180,7 +187,8 @@
       <br>
       <br>
 
-      <label class="form-check-label" for="onlyNamedChords"><b style="color: red;">Experimental: </b>Use Un-Nameable Chords</label>
+      <label class="form-check-label" for="onlyNamedChords"><b style="color: red;">Experimental: </b>Use Un-Nameable
+        Chords</label>
       <br>
       <input class="form-check-input big-checkbox" type="checkbox" id="onlyNamedChords">
     </div>
@@ -192,10 +200,15 @@
         How do I use This?
       </h2>
       <p>
-          To generate a new progression, click the green button on the left. To play it, click the green button on the right. This will play each chord in the progression for the duration specified in the configuration section. If you want to stop playback early, press the red button. If you want to start playback at a specific chord, click that chord's tile.
+        To generate a new progression, click the green button on the left. To play it, click the green button on the
+        right. This will play each chord in the progression for the duration specified in the configuration section. If
+        you want to stop playback early, press the red button. If you want to start playback at a specific chord, click
+        that chord's tile.
       </p>
       <p>
-          While the progression is playing, The currently playing chord will have a progress bar that ticks up to show the remaining time that chord will be played for. Yet to be played chords are greyed out while already played chords have full progress bars.
+        While the progression is playing, The currently playing chord will have a progress bar that ticks up to show the
+        remaining time that chord will be played for. Yet to be played chords are greyed out while already played chords
+        have full progress bars.
       </p>
       <p>
         <b>
@@ -203,22 +216,29 @@
         </b>
       </p>
       <p>
-        <b>Chord Input</b> - If you have your own progression you want to input for playback, enter it here and press 'Apply.' Alternatively, if you like the generated progression but just wanted to tweak it a little, apply those tweaks here and press 'Apply.'
+        <b>Chord Input</b> - If you have your own progression you want to input for playback, enter it here and press
+        'Apply.' Alternatively, if you like the generated progression but just wanted to tweak it a little, apply those
+        tweaks here and press 'Apply.'
       </p>
       <p>
         <b>Number of Chords Per Progression</b> - Choose the number of chords a generated progression should have.
       </p>
       <p>
-        <b>Minimum Chordal Members</b> - pick the minimum amount of notes in generated chords. There will still be chords with more notes, but never chords with less. This setting can be a way to increase the relative 'complexity' of the chords in the progression.
+        <b>Minimum Chordal Members</b> - pick the minimum amount of notes in generated chords. There will still be
+        chords with more notes, but never chords with less. This setting can be a way to increase the relative
+        'complexity' of the chords in the progression.
       </p>
       <p>
         <b>Seconds to Play Each Chord</b> - Duration in seconds to play each chord. Decimal values are supported.
       </p>
       <p>
-        <b>Loop Playback</b> - Check this box to have playback immediately start over from the beginning when the progression finishes.
+        <b>Loop Playback</b> - Check this box to have playback immediately start over from the beginning when the
+        progression finishes.
       </p>
       <p>
-        <b>Use Un-Nameable Chords</b> - This feature is experimental. By default, the generator will only use chords that can be resolved to human readable names. Disabling this will possibly introduce more exciting and exotic chords into your progression, but will cause some other features to break.
+        <b>Use Un-Nameable Chords</b> - This feature is experimental. By default, the generator will only use chords
+        that can be resolved to human readable names. Disabling this will possibly introduce more exciting and exotic
+        chords into your progression, but will cause some other features to break.
       </p>
     </div>
   </div>
@@ -228,12 +248,12 @@
 <br>
 
 <footer class="page-footer font-small blue pt-4">
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">Quetions? Inquiries? Send them to 
-      <a href="mailto:chordal.creativity@gmail.com"> chordal.creativity@gmail.com</a>
-    </div>
-    <!-- Copyright -->
-  
-  </footer>
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">Quetions? Inquiries? Send them to
+    <a href="mailto:chordal.creativity@gmail.com"> chordal.creativity@gmail.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
 
 </html>
