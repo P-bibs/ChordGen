@@ -7,10 +7,12 @@ var currentProg = [];
 var currentProgMembers = [];
 var currentProgNames = [];
 var seed = [];
-var currentChordIndex;
+var currentChordIndex = 0;
 var playbackTimer;
 
 var settings = {
+  instrument: Tone.Synth,
+  instrumentType: "monophonic",
   chordsPerProg: 5,
   minimumChordalMembers: 3,
   noteDuration: 2,
@@ -35,6 +37,7 @@ async function init() {
 
   seed = generateRandomProg(5, settings.minimumChordalMembers);
   addConfigEventListeners();
+  changeInstrument(0);
   generateProg();
 }
 
@@ -81,6 +84,88 @@ function addConfigEventListeners() {
   document.getElementById("onlyNamedChords").addEventListener("change", function (a) {
     settings.onlyNamedChords = !(document.getElementById("onlyNamedChords").checked);
   });
+}
+
+function changeInstrument(num) {
+  if (playbackTimer !== undefined) {
+    stopPlayback();
+  }
+  
+
+  var synths = [
+    Tone.Synth,
+    Tone.AMSynth,
+    Tone.DuoSynth,
+    Tone.FMSynth,
+    Tone.MonoSynth,
+  ];
+
+  var samples = [
+    "bass-electric",
+    "bassoon",
+    "cello",
+    "clarinet",
+    "contrabass",
+    "flute",
+    "french-horn",
+    "guitar-acoustic",
+    "guitar-electric",
+    "harmonium",
+    "harp",
+    "organ",
+    "piano",
+    "saxophone",
+    "trombone",
+    "trumpet",
+    "tuba",
+    "violin",
+    "xylophone"
+  ];
+
+  var instruments = synths.concat(samples);
+
+  settings.instrument = instruments[num];
+  if (num < 5) {
+    settings.instrumentType = "monophonic";
+  }
+  else {
+    settings.instrumentType = "sampler";
+  }
+
+  if (settings.instrumentType === "monophonic") {
+    synth = new Tone.PolySynth(7, settings.instrument).toMaster();
+    console.log("Monophonic synth made")
+    console.log(settings.instrument);
+  }
+  else if (settings.instrumentType === "sampler") {
+    synth = SampleLibrary.load({
+      instruments: settings.instrument,
+      baseUrl: "/tonejs-instruments/samples/"
+    });
+    console.log("Polyphonic synth made")
+    console.log(settings.instrument);
+  }
+  else if (settings.instrumentType === "polyphonic" ) {
+    synth = new settings.instrument().toMaster();
+    console.log("Sampler synth made")
+    console.log(settings.instrument);
+  }
+  else {
+    console.log("ERROR: can't recognize instrument type")
+  }
+
+
+  // show keyboard on load //
+  Tone.Buffer.on('load', function() {
+    console.log("loading samples done")
+    synth.toMaster();
+  });
+
+  // show error message on loading error
+  Tone.Buffer.on('error', function() {
+    console.log("I'm sorry, there has been an error loading the samples. This page works best on on the most up-to-date version of Chrome.");
+  })
+
 }
 
 function generateProg() {
@@ -152,14 +237,6 @@ function probabilityToBinary(probArry) {
 
 function playProg(startIndex = 0) {
   stopPlayback();
-
-  voiceCount = 0;
-  for (let i = 0; i < currentProg.length; i += 1) {
-    if (currentProg[i].reduce((a, b) => a + b) > voiceCount) {
-      voiceCount = currentProg[i].reduce((a, b) => a + b);
-    }
-  }
-  synth = new Tone.PolySynth(voiceCount, Tone.synth).toMaster();
 
   currentChordIndex = startIndex
 

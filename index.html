@@ -32,6 +32,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
   integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+<script src="tonejs-instruments/Tonejs-Instruments.js"></script>
 <script type="module">
   import * as PyChordParser from './__target__/PyChordParser.js'; window.PyChordParser = PyChordParser;</script>
 <script src="main.js"></script>
@@ -72,6 +73,75 @@
       <button type="button" class="btn btn-danger btn-block" onclick="stopPlayback()">
         click here to stop
       </button>
+
+      <br>
+
+      <h3 style="text-align: center">Instrument:</h3>
+
+      <div class="column">
+        <div class="row">
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(0)" class="btn btn-secondary btn-block">Synth</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(1)" class="btn btn-secondary btn-block">AM Synth</button>
+          </div>
+          <div class="col-md-2">
+              <button type="button" onclick="changeInstrument(2)" class="btn btn-secondary btn-block">Duo Synth</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(3)" class="btn btn-secondary btn-block">FM Synth</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(4)" class="btn btn-secondary btn-block">Mono Synth</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(5)" class="btn btn-secondary btn-block">Electric Bass</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(6)" class="btn btn-secondary btn-block">Bassoon</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(7)" class="btn btn-secondary btn-block">Cello</button>
+          </div>
+          <div class="col-md-2">
+              <button type="button" onclick="changeInstrument(8)" class="btn btn-secondary btn-block">Clarinet</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(9)" class="btn btn-secondary btn-block">Contrabass</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(10)" class="btn btn-secondary btn-block">Flute</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(11)" class="btn btn-secondary btn-block">French Horn</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(12)" class="btn btn-secondary btn-block">Acoustic Guitar</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(13)" class="btn btn-secondary btn-block">Electric Guitar</button>
+          </div>
+          <div class="col-md-2">
+              <button type="button" onclick="changeInstrument(14)" class="btn btn-secondary btn-block">Harmonium</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(15)" class="btn btn-secondary btn-block">Harp</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(16)" class="btn btn-secondary btn-block">Organ</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" onclick="changeInstrument(17)" class="btn btn-secondary btn-block">Piano</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <br>
