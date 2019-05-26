@@ -89,7 +89,6 @@ function changeInstrument(num) {
     stopPlayback();
   }
 
-
   var synths = [
     Tone.Synth,
     Tone.AMSynth,
@@ -121,6 +120,14 @@ function changeInstrument(num) {
   ];
 
   var instruments = synths.concat(samples);
+
+  var buttons = document.getElementsByClassName('instrument-button');
+  var newButton = buttons[num].children[0];
+  var oldButton = buttons[instruments.indexOf(settings.instrument)].children[0];
+  oldButton.classList.remove("instrument-button-active")
+  oldButton.classList.add("instrument-button-inactive")
+  newButton.classList.remove("instrument-button-inactive")
+  newButton.classList.add("instrument-button-active")
 
   settings.instrument = instruments[num];
   if (num < 5) {

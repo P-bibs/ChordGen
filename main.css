@@ -25,6 +25,38 @@
     }
 }
 
+@keyframes instrument-button-activate {
+    from {
+        background-color: #dcdcdc
+    }
+
+    to {
+        background-color: #7abd89
+    }
+}
+
+@keyframes instrument-button-deactivate {
+    from {
+        background-color: #7abd89
+    }
+
+    to {
+        background-color: #dcdcdc
+    }
+}
+
+.instrument-button-active {
+    animation-name: instrument-button-activate;
+    animation-fill-mode: forwards;
+    animation-duration: .25s;
+}
+
+.instrument-button-inactive {
+    animation-name: instrument-button-deactivate;
+    animation-fill-mode: forwards;
+    animation-duration: .25s;
+}
+
 .chord-tile-active {
     background: rgb(204, 204, 204);
     color: black;
