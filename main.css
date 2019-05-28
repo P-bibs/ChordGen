@@ -20,7 +20,8 @@
         margin-bottom: 40px;
     }
 
-    .instrument-button {
+    .instrument-button,
+    .octave-button {
         margin-bottom: 15px;
     }
 }
@@ -45,13 +46,15 @@
     }
 }
 
-.instrument-button-active {
+.instrument-button-active,
+.octave-button-active {
     animation-name: instrument-button-activate;
     animation-fill-mode: forwards;
     animation-duration: .25s;
 }
 
-.instrument-button-inactive {
+.instrument-button-inactive,
+.ocatve-button-inactive {
     animation-name: instrument-button-deactivate;
     animation-fill-mode: forwards;
     animation-duration: .25s;

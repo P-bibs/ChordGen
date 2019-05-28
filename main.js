@@ -13,6 +13,7 @@ var playbackTimer;
 var settings = {
   instrument: Tone.Synth,
   instrumentType: "monophonic",
+  octave: 4,
   chordsPerProg: 5,
   minimumChordalMembers: 3,
   noteDuration: 2,
@@ -36,6 +37,7 @@ async function init() {
   seed = generateRandomProg(5, settings.minimumChordalMembers);
   addConfigEventListeners();
   changeInstrument(0);
+  changeOctave(4);
   generateProg();
 }
 
@@ -169,6 +171,18 @@ function changeInstrument(num) {
 
 }
 
+function changeOctave(octave) {
+  var buttons = document.getElementsByClassName('octave-button');
+  var newButton = buttons[octave - 1].children[0];
+  var oldButton = buttons[settings.octave - 1].children[0];
+  oldButton.classList.remove("octave-button-active")
+  oldButton.classList.add("octave-button-inactive")
+  newButton.classList.remove("octave-button-inactive")
+  newButton.classList.add("octave-button-active")
+
+  settings.octave = octave;
+}
+
 function generateProg() {
   stopPlayback();
 
@@ -261,7 +275,7 @@ function playCurrentChord() {
   }
 
   console.log("attack triggered: " + currentProgMembers[currentChordIndex] + " " + currentChordIndex);
-  synth.triggerAttack(currentProgMembers[currentChordIndex].map(a => a + "4"));
+  synth.triggerAttack(currentProgMembers[currentChordIndex].map(a => a + settings.octave.toString()));
 
   var currentTile = document.getElementsByClassName("chord-tile")[currentChordIndex]
   currentTile.classList.add("chord-tile-active")
