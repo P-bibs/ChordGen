@@ -314,6 +314,13 @@ function determineChordalMembersAndNames() {
     } else {
       var chord = PyChordParser.parseChord(currentProgNames[i][0])
       var notes = chord.getSpelling();
+      notes = notes.map(function (a) {
+        if (a.includes("##")) {
+          return a.replace(/##/g, "x")
+        } else {
+          return a
+        }
+      });
 
       currentProgMembers.push(notes);
     }
