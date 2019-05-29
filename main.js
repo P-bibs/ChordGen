@@ -23,13 +23,13 @@ var settings = {
 
 async function init() {
   try {
-    model = await tf.loadLayersModel('http://134.209.209.28:80/model.json');
+    model = await tf.loadLayersModel('http://chordgen.com/model.json');
   } catch (err) {
     model = await tf.loadLayersModel('http://localhost:8081/model.json');
   }
 
   try {
-    hashedReverseDict = JSON.parse(Get('http://134.209.209.28:80/hashedReverseDict.json'));
+    hashedReverseDict = JSON.parse(Get('http://chordgen.com/hashedReverseDict.json'));
   } catch (err) {
     hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
   }
