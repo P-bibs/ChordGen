@@ -84,6 +84,26 @@ function addConfigEventListeners() {
   document.getElementById("onlyNamedChords").addEventListener("change", function (a) {
     settings.onlyNamedChords = !(document.getElementById("onlyNamedChords").checked);
   });
+  window.addEventListener("keypress", function(e){
+    var keyCode = e.which;
+    if (keyCode === 32) {
+      if (playbackTimer) {
+        console.log("stopping")
+        stopPlayback()
+      }
+      else {
+        console.log("playing")
+        playProg(0);
+      }
+      e.preventDefault();
+    }
+  })
+  window.addEventListener("keyup", function(e){
+    var keyCode = e.which;
+    if (keyCode === 32) {
+      e.preventDefault();
+    }
+  })
 }
 
 function changeInstrument(num) {
@@ -289,6 +309,7 @@ function playCurrentChord() {
 function stopPlayback() {
   if (synth) {
     clearInterval(playbackTimer);
+    playbackTimer = false;
 
     currentChordIndex = 0;
 
