@@ -12,7 +12,7 @@ var playbackTimer;
 
 var settings = {
   instrument: Tone.Synth,
-  instrumentType: "monophonic",
+  instrumentType: "sampler",
   octave: 4,
   chordsPerProg: 5,
   minimumChordalMembers: 3,
@@ -111,6 +111,28 @@ function changeInstrument(num) {
     stopPlayback();
   }
 
+  var samples = [
+    "cello",
+    "guitar-acoustic",
+    "organ",
+    "harp",
+    "guitar-electric",
+    "xylophone",
+    "bassoon",
+    "flute",
+    "harmonium",
+    "contrabass",
+    "clarinet",
+    "piano",
+    "saxophone",
+    "trombone",
+    "trumpet",
+    "tuba",
+    "violin",
+    "french-horn",
+    "bass-electric"
+  ];
+
   var synths = [
     Tone.Synth,
     Tone.AMSynth,
@@ -119,29 +141,8 @@ function changeInstrument(num) {
     Tone.MonoSynth,
   ];
 
-  var samples = [
-    "bass-electric",
-    "bassoon",
-    "cello",
-    "clarinet",
-    "contrabass",
-    "flute",
-    "french-horn",
-    "guitar-acoustic",
-    "guitar-electric",
-    "harmonium",
-    "harp",
-    "organ",
-    "piano",
-    "saxophone",
-    "trombone",
-    "trumpet",
-    "tuba",
-    "violin",
-    "xylophone"
-  ];
 
-  var instruments = synths.concat(samples);
+  var instruments = samples.concat(synths);
 
   var buttons = document.getElementsByClassName('instrument-button');
   var newButton = buttons[num].children[0];
@@ -152,10 +153,10 @@ function changeInstrument(num) {
   newButton.classList.add("instrument-button-active")
 
   settings.instrument = instruments[num];
-  if (num < 5) {
-    settings.instrumentType = "monophonic";
-  } else {
+  if (num < 19) {
     settings.instrumentType = "sampler";
+  } else {
+    settings.instrumentType = "monophonic";
   }
 
   if (settings.instrumentType === "monophonic") {
