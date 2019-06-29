@@ -25,23 +25,13 @@ async function init() {
   try {
     model = await tf.loadLayersModel('https://paulbiberstein.me/chordgen/model.json');
   } catch (err) {
-    try {
-      model = await tf.loadLayersModel('http://chordgen.com/model.json');
-    } catch (err) {
-      model = await tf.loadLayersModel('http://localhost:8081/model.json');
-    }
-    
+    model = await tf.loadLayersModel('http://localhost:8081/model.json');
   }
 
   try {
     hashedReverseDict = JSON.parse(Get('https://paulbiberstein.me/chordgen/hashedReverseDict.json'));
   } catch (err) {
-    try {
-      hashedReverseDict = JSON.parse(Get('http://chordgen.com/hashedReverseDict.json'));
-    } catch (err) {
-      hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
-      
-    }
+    hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
   }
 
   seed = generateRandomProg(5, settings.minimumChordalMembers);
