@@ -3,16 +3,18 @@
 
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140726324-1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143047727-1"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
+    let host = window.location.hostname;
+    if (host != "localhost") {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    function gtag() {
-      dataLayer.push(arguments);
+      gtag('config', 'UA-143047727-1');
     }
-    gtag('js', new Date());
+  </script>
 
-    gtag('config', 'UA-140726324-1');
   </script>
 
   <meta charset="utf-8">
@@ -30,8 +32,6 @@
 
 <!-- Libraries-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.8.3/Tone.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
 <script src="tonejs-instruments/Tonejs-Instruments.js"></script>
 <script type="module">
