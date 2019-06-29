@@ -166,7 +166,7 @@ function changeInstrument(num) {
   } else if (settings.instrumentType === "sampler") {
     synth = SampleLibrary.load({
       instruments: settings.instrument,
-      baseUrl: "/tonejs-instruments/samples/"
+      baseUrl: "/chordgen/tonejs-instruments/samples/"
     });
     console.log("Polyphonic synth made")
     console.log(settings.instrument);
