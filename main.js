@@ -23,13 +23,13 @@ var settings = {
 
 async function init() {
   try {
-    model = await tf.loadLayersModel('https://paulbiberstein.me/chordgen/model.json');
+    model = await tf.loadLayersModel('https://chordgen.paulbiberstein.me/model.json');
   } catch (err) {
     model = await tf.loadLayersModel('http://localhost:8081/model.json');
   }
 
   try {
-    hashedReverseDict = JSON.parse(Get('https://paulbiberstein.me/chordgen/hashedReverseDict.json'));
+    hashedReverseDict = JSON.parse(Get('https://chordgen.paulbiberstein.me/hashedReverseDict.json'));
   } catch (err) {
     hashedReverseDict = JSON.parse(Get('http://localhost:8081/hashedReverseDict.json'));
   }
@@ -166,7 +166,7 @@ function changeInstrument(num) {
   } else if (settings.instrumentType === "sampler") {
     synth = SampleLibrary.load({
       instruments: settings.instrument,
-      baseUrl: "/chordgen/tonejs-instruments/samples/"
+      baseUrl: "/tonejs-instruments/samples/"
     });
     console.log("Polyphonic synth made")
     console.log(settings.instrument);
